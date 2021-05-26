@@ -11,7 +11,7 @@ start() {
 
 source /home/cardano/cnode_env
 
-      if [${CARDANO_RUN_MODE} = 1]; then
+      if [ "$CARDANO_RUN_MODE" = 1 ]; then
         ebegin "Starting $RC_SVCNAME Relay Mode"
         start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
         --make-pidfile --pidfile /home/cardano/cnode/cardano-node.pid \
@@ -23,9 +23,9 @@ source /home/cardano/cnode_env
            --config $CARDANO_CONFIG_PATH
         eend $?
 
-      else
+       else
 
-          if [${CARDANO_RUN_MODE} = 2]; then
+          if [ "$CARDANO_RUN_MODE" = 2 ]; then
              ebegin "Starting $RC_SVCNAME Relay Mode"
              start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
              --make-pidfile --pidfile /home/cardano/cnode/cardano-node.pid \
@@ -38,7 +38,13 @@ source /home/cardano/cnode_env
                 --shelley-kes-key $CARDANO_KES_KEY_PATH \
                 --shelley-operational-certificate $CARDANO_OP_CERT_PATH
              eend $?
-          fi
+
+           else
+              eerror ''
+              eerror 'Invalid run mode. Check CARDANO_RUN_MODE in ~/cnode_env'
+              eerror ''
+              return 1
+           fi
 
       fi
 
