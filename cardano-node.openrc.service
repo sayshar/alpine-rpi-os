@@ -1,0 +1,53 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description="Cardano node service"
+
+depend() {
+        after network-online
+}
+
+start() {
+
+source /home/cardano/cnode_env
+
+      if [${CARDANO_RUN_MODE} = 1]; then
+        ebegin "Starting $RC_SVCNAME Relay Mode"
+        start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
+        --make-pidfile --pidfile /home/cardano/cnode/cardano-node.pid \
+        -- --topology $CARDANO_TOPOLOGY_PATH \
+           --database-path $CARDANO_DB_PATH \
+           --socket-path $CARDANO_NODE_SOCKET_PATH \
+           --host-addr $CARDANO_HOST_ADDRESS \
+           --port $CARDANO_PORT \
+           --config $CARDANO_CONFIG_PATH
+        eend $?
+
+      else
+
+          if [${CARDANO_RUN_MODE} = 2]; then
+             ebegin "Starting $RC_SVCNAME Relay Mode"
+             start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
+             --make-pidfile --pidfile /home/cardano/cnode/cardano-node.pid \
+             -- --topology $CARDANO_TOPOLOGY_PATH \
+                --database-path $CARDANO_DB_PATH \
+                --socket-path $CARDANO_NODE_SOCKET_PATH \
+                --port $CARDANO_PORT \
+                --config $CARDANO_CONFIG_PATH \
+                --shelley-vrf-key $CARDANO_VRF_KEY_PATH \
+                --shelley-kes-key $CARDANO_KES_KEY_PATH \
+                --shelley-operational-certificate $CARDANO_OP_CERT_PATH
+             eend $?
+          fi
+
+      fi
+
+}
+
+stop() {
+        ebegin "Stopping $RC_SVCNAME"
+        start-stop-daemon --stop --exec /usr/local/bin/cardano-node run \
+        --pidfile /home/cardano/cnode/cardano-node.pid \
+        -s 2
+        eend $?
+}
