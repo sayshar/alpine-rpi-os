@@ -25,5 +25,4 @@ adduser cardano wheel
 ```
 9. Either exit or reboot and login to cardano
 
-10. sudo apk add bash
- 
+10. sudo apk add bash 
