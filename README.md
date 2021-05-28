@@ -44,15 +44,17 @@
 ### To install the scripts and services correctly:
 1)  Clone this repo to obtain the compressed file containing the folder and scripts to quickly start your cardano node. Use the command:
     
-    `git clone 
+    `git clone https://github.com/sayshar/AlpineOS-Cardano-RPi.git`
     
-2)  Extract alpine_cnode_scripts_and_services.tar.gz using the command
+2)  Extract alpine_cnode_scripts_and_services.tar.gz using the command:
+
+    `cd AlpineOS-Cardano-RPi`
 
     `mkdir alpine_cnode_scripts_and_services`
     
     `tar -xzf alpine_cnode_scripts_and_services.tar.gz -C alpine_cnode_scripts_and_services`
     
-3)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node.
+3)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
 
     `mv alpine_cnode_scripts_and_services/home/cardano/* ~/`
     
