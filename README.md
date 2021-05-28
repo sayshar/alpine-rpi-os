@@ -27,6 +27,19 @@
 10) Install bash to ensure bash script compatibility
     `sudo apk add bash`
 
+## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
+### You can obtain the static binaries for version 1.27.0 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder.
+1)  Download the binaries
+
+    `wget -O aarch64-unknown-linux-musl-cardano-node-1.27.0.zip ~/ https://ci.zw3rk.com/build/1758/download/1/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip`
+
+2)  Unzip and install the binaries via the commands
+
+    `unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.27.0.zip`
+    
+    `mv ~/cardano-node/* /usr/local/bin/`
+    
+
 ## If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
 ### To install the scripts and services correctly:
 1)  Extract alpine_cnode_scripts_and_services.tar.gz using the command
