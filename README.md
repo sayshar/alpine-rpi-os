@@ -1,6 +1,6 @@
 # AlpineOS-Cardano-RPi
 
-# Why use AlpineOS on the Raspberry Pi? Here are some reasons:
+## Why use AlpineOS on the Raspberry Pi? Here are some reasons:
 1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
 2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when running cardano-node is running).
 3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
@@ -36,6 +36,7 @@ addgroup cardano adm
     `sudo apk add bash`
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
+
 ### You can obtain the static binaries for version 1.27.0 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries
 
@@ -82,6 +83,6 @@ addgroup cardano adm
     `mv prometheus-2.27.1.linux-arm64 prometheus`
     
     `mv node_exporter-1.1.2.linux-arm64 node_exporter`
-    
+
 3)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
 
