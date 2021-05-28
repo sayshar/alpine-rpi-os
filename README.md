@@ -1,5 +1,11 @@
 # AlpineOS-Cardano-RPi
 
+# Why use AlpineOS on the Raspberry Pi? Here are some reasons:
+1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
+2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when running cardano-node is running).
+3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
+4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
+
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
 1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/aarch64/alpine-rpi-3.13.5-aarch64.tar.gz
 
@@ -16,12 +22,13 @@
 7) Add a new user called cardano via the command `adduser cardano` and its password as instructed.
 
 8) Run the following commands to grant the new user root privileges
-
-`apk add sudo` 
-`echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel `
-`addgroup cardano wheel`
-`addgroup cardano sys`
-`addgroup cardano adm`
+```
+apk add sudo
+echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+addgroup cardano wheel
+addgroup cardano sys
+addgroup cardano adm
+```
 
 9) Either exit root via the command `exit` or reboot and login to cardano
 
@@ -75,10 +82,6 @@
     `mv prometheus-2.27.1.linux-arm64 prometheus`
     
     `mv node_exporter-1.1.2.linux-arm64 node_exporter`
+    
 3)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
 
-# Why use AlpineOS on the Raspberry Pi? Here are some reasons:
-1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
-2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when running cardano-node is running).
-3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
-4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
