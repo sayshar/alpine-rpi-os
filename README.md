@@ -1,14 +1,41 @@
 # AlpineOS-Cardano-RPi
-If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
+### Initial Setup for AlpineOS:
+1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/aarch64/alpine-rpi-3.13.5-aarch64.tar.gz
 
-To install the scripts and services correctly,
+2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card
+
+3) Plug in a keyboard and monitor.
+
+4) Login with username 'root'. It should prompt you for a new password on first log in.
+
+5) Run the command `setup-disk` and create the partition. You may have to retry and erase the entire disk.
+
+6) Run the command `setup-alpine` and follow the instructions.
+
+7) Add a new user called cardano via the command `adduser cardano` and its password as instructed.
+
+8) Run the following commands to grant the new user root privileges
+
+`apk add sudo` 
+`echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel `
+`addgroup cardano wheel`
+`addgroup cardano sys`
+`addgroup cardano adm`
+
+9) Either exit root via the command `exit` or reboot and login to cardano
+
+10) Install bash to ensure bash script compatibility
+    `sudo apk add bash`
+
+## If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
+### To install the scripts and services correctly:
 1)  Extract alpine_cnode_scripts_and_services.tar.gz using the command
 
     `mkdir alpine_cnode_scripts_and_services`
     
     `tar -xzf alpine_cnode_scripts_and_services.tar.gz -C alpine_cnode_scripts_and_services`
     
-2)  Run the following commands to then install cnode, scripts and services into the correct folders
+2)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node.
 
     `mv alpine_cnode_scripts_and_services/home/cardano/* ~/`
     
@@ -16,7 +43,7 @@ To install the scripts and services correctly,
     
 3)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
 
-If you plan on using prometheus and node exporter, do the following
+### If you plan on using prometheus and node exporter, do the following
 1)  Download prometheus and node-exporter into the home directory
     
     `wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-arm64.tar.gz`
