@@ -54,22 +54,18 @@ addgroup cardano adm
 
 ## If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
 ### To install the scripts and services correctly:
-1)  Clone this repo to obtain the compressed file containing the folder and scripts to quickly start your cardano node. Use the command:
+1)  Clone this repo to obtain the neccessary folder and scripts to quickly start your cardano node. Use the command:
     
     ```
-    https://github.com/armada-alliance/alpine-rpi-os
+    git clone https://github.com/armada-alliance/alpine-rpi-os
 
     ```
-    
-2)  Extract alpine_cnode_scripts_and_services.tar.gz using the command:
-
-    `cd AlpineOS-Cardano-RPi`
-    
-    `tar -xzf alpine_cnode_scripts_and_services.tar.gz`
-    
-3)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
+            
+2)  Run the following commands to then install the cnode folder, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
 
     ```
+    cd alpine-rpi-os
+        
     mv alpine_cnode_scripts_and_services/home/cardano/* ~/
     
     mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
