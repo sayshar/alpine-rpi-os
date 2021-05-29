@@ -1,5 +1,11 @@
 # AlpineOS-Cardano-RPi
 
+## Why use AlpineOS on the Raspberry Pi? Here are some reasons:
+1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
+2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when running cardano-node is running).
+3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
+4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
+
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
 1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/aarch64/alpine-rpi-3.13.5-aarch64.tar.gz
 
@@ -16,12 +22,13 @@
 7) Add a new user called cardano via the command `adduser cardano` and its password as instructed.
 
 8) Run the following commands to grant the new user root privileges
-
-`apk add sudo` 
-`echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel `
-`addgroup cardano wheel`
-`addgroup cardano sys`
-`addgroup cardano adm`
+```
+apk add sudo
+echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
+addgroup cardano wheel
+addgroup cardano sys
+addgroup cardano adm
+```
 
 9) Either exit root via the command `exit` or reboot and login to cardano
 
@@ -29,23 +36,30 @@
     `sudo apk add bash`
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
-### You can obtain the static binaries for version 1.27.0 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+
+#### You can obtain the static binaries for version 1.27.0 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries
 
-    `wget -O aarch64-unknown-linux-musl-cardano-node-1.27.0.zip ~/ https://ci.zw3rk.com/build/1758/download/1/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip`
-
+    ```
+    wget -O https://ci.zw3rk.com/build/1758/download/1/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
+    ```
 2)  Unzip and install the binaries via the commands
 
-    `unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.27.0.zip`
+    ```
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
     
-    `mv ~/cardano-node/* /usr/local/bin/`
+    mv ~/cardano-node/* /usr/local/bin/
+    ```
     
 
 ## If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
 ### To install the scripts and services correctly:
 1)  Clone this repo to obtain the compressed file containing the folder and scripts to quickly start your cardano node. Use the command:
     
-    `git clone https://github.com/sayshar/AlpineOS-Cardano-RPi.git`
+    ```
+    https://github.com/armada-alliance/alpine-rpi-os
+
+    ```
     
 2)  Extract alpine_cnode_scripts_and_services.tar.gz using the command:
 
@@ -55,28 +69,30 @@
     
 3)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
 
-    `mv alpine_cnode_scripts_and_services/home/cardano/* ~/`
+    ```
+    mv alpine_cnode_scripts_and_services/home/cardano/* ~/
     
-    `mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/`
+    mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    ```
     
 4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
 
 ### If you plan on using prometheus and node exporter, do the following:
 1)  Download prometheus and node-exporter into the home directory
     
-    `wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-arm64.tar.gz`
+    ```
+    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-arm64.tar.gz
     
-    `wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-arm64.tar.gz`
+    wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-arm64.tar.gz
+    ```
 
 2)  Rename the folders with the following commands
 
-    `mv prometheus-2.27.1.linux-arm64 prometheus`
+    ```
+    mv prometheus-2.27.1.linux-arm64 prometheus
     
-    `mv node_exporter-1.1.2.linux-arm64 node_exporter`
+    mv node_exporter-1.1.2.linux-arm64 node_exporter
+    ```
+
 3)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
 
-# Why use AlpineOS on the Raspberry Pi? Here are some reasons:
-1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
-2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when running cardano-node is running).
-3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
-4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
