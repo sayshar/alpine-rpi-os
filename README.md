@@ -34,6 +34,10 @@ addgroup cardano adm
 
 10) Install bash to ensure bash script compatibility
     `sudo apk add bash`
+    
+11) Also install git, we will need it later.
+
+    `sudo apk add git`
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
@@ -48,7 +52,7 @@ addgroup cardano adm
     ```
     unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
     
-    mv ~/cardano-node/* /usr/local/bin/
+    sudo mv ~/cardano-node/* /usr/local/bin/
     ```
     
 
@@ -66,9 +70,9 @@ addgroup cardano adm
     ```
     cd alpine-rpi-os
         
-    mv alpine_cnode_scripts_and_services/home/cardano/* ~/
+    sudo mv alpine_cnode_scripts_and_services/home/cardano/* ~/
     
-    mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    sudo mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
     ```
     
 4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
