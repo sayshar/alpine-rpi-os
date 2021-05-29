@@ -33,6 +33,7 @@ addgroup cardano adm
 9) Either exit root via the command `exit` or reboot and login to cardano
 
 10) Install bash to ensure bash script compatibility
+
     `sudo apk add bash`
     
 11) Also install git, we will need it later.
