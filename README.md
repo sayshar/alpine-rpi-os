@@ -72,7 +72,8 @@ addgroup cardano adm
     cd alpine-rpi-os
         
     sudo mv alpine_cnode_scripts_and_services/home/cardano/* ~/
-    
+    ```
+    ```
     sudo mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
     ```
     
