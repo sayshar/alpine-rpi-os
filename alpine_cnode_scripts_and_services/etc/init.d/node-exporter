@@ -1,0 +1,29 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description="Node exporter service"
+
+depend() {
+	after network-online 
+}
+
+start() {
+
+source /home/cardano/cnode_env
+
+        ebegin "Starting $RC_SVCNAME"
+        start-stop-daemon --background --start --exec /home/cardano/node_exporter/node_exporter \
+        --make-pidfile --pidfile /var/run/node-exporter.pid \
+        -- --web.listen-address="$NODE_EXPORTER_LISTEN_ADDRESS" 
+        eend $?
+        
+}
+
+stop() {
+	ebegin "Stopping $RC_SVCNAME"
+        start-stop-daemon --stop --exec /home/cardano/node_exporter/node_exporter \
+        --pidfile /var/run/node-exporter.pid \
+        -s 2 
+        eend $?
+}
+
