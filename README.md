@@ -50,10 +50,8 @@
 2)  Extract alpine_cnode_scripts_and_services.tar.gz using the command:
 
     `cd AlpineOS-Cardano-RPi`
-
-    `mkdir alpine_cnode_scripts_and_services`
     
-    `tar -xzf alpine_cnode_scripts_and_services.tar.gz -C alpine_cnode_scripts_and_services`
+    `tar -xzf alpine_cnode_scripts_and_services.tar.gz`
     
 3)  Run the following commands to then install cnode, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
 
