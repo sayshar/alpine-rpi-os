@@ -34,11 +34,15 @@ addgroup cardano adm
 
 10) Install bash to ensure bash script compatibility
 
-    `sudo apk add bash`
+    ```
+    sudo apk add bash
+    ```
     
 11) Also install git, we will need it later.
 
-    `sudo apk add git`
+    ```
+    sudo apk add git
+    ```
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
@@ -63,7 +67,6 @@ addgroup cardano adm
     
     ```
     git clone https://github.com/armada-alliance/alpine-rpi-os
-
     ```
             
 2)  Run the following commands to then install the cnode folder, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
@@ -71,9 +74,16 @@ addgroup cardano adm
     ```
     cd alpine-rpi-os
         
-    sudo mv alpine_cnode_scripts_and_services/home/cardano/* ~/
-    
-    sudo mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    sudo cp alpine_cnode_scripts_and_services/home/cardano/* ~/
+    ```
+    ```
+    sudo cp alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    ```
+    ```
+    chmod +x start_stop_cnode_service.sh cnode/autorestart_cnode.sh
+    ```
+    ```
+    sudo chmod +x /etc/init.d/cardano-node /etc/init.d/prometheus /etc/init.d/node-exporter
     ```
     
 4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
@@ -83,7 +93,8 @@ addgroup cardano adm
     
     ```
     wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-arm64.tar.gz
-    
+    ``` 
+    ```
     wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-arm64.tar.gz
     ```
 
@@ -91,7 +102,8 @@ addgroup cardano adm
 
     ```
     mv prometheus-2.27.1.linux-arm64 prometheus
-    
+    ```
+    ```
     mv node_exporter-1.1.2.linux-arm64 node_exporter
     ```
 
