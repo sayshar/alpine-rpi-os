@@ -74,10 +74,16 @@ addgroup cardano adm
     ```
     cd alpine-rpi-os
         
-    sudo mv alpine_cnode_scripts_and_services/home/cardano/* ~/
+    sudo cp alpine_cnode_scripts_and_services/home/cardano/* ~/
     ```
     ```
-    sudo mv alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    sudo cp alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    ```
+    ```
+    chmod +x start_stop_cnode_service.sh cnode/autorestart_cnode.sh
+    ```
+    ```
+    sudo chmod +x /etc/init.d/cardano-node /etc/init.d/prometheus /etc/init.d/node-exporter
     ```
     
 4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
