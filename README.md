@@ -13,13 +13,15 @@
 
 3) Plug in a keyboard and monitor.
 
-4) Login with username 'root'. It should prompt you for a new password on first log in.
+4) Login with username 'root'.
 
-5) Run the command `setup-disk` and create the partition. You may have to retry and erase the entire disk.
+5) Run the command `setup-alpine` and follow the instructions.
 
-6) Run the command `setup-alpine` and follow the instructions.
+6) Run the command `setup-disk` and create the partition. You may have to retry and erase the entire disk.
 
-7) Add a new user called cardano via the command `adduser cardano` and its password as instructed.
+7) Reboot.
+
+7) Add a new user called cardano via the command `adduser cardano` and its password as instructed. (For username other than **cardano**, refer to **General Troubleshooting**)
 
 8) Run the following commands to grant the new user root privileges
 ```
@@ -46,10 +48,10 @@ addgroup cardano video
     sudo apk add bash
     ```
     
-11) Also install git, we will need it later.
+11) Also install git and wget, we will need it later.
 
     ```
-    sudo apk add git
+    sudo apk add git wget
     ```
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
@@ -84,7 +86,7 @@ addgroup cardano video
     cp -r alpine-rpi-os/alpine_cnode_scripts_and_services/home/cardano/* ~/
     ```
     ```
-    sudo cp alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    sudo cp alpine-rpi-os/alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
     ```
     ```
     chmod +x ~/start_stop_cnode_service.sh ~/cnode/autorestart_cnode.sh
@@ -92,8 +94,17 @@ addgroup cardano video
     ```
     sudo chmod +x /etc/init.d/cardano-node /etc/init.d/prometheus /etc/init.d/node-exporter
     ```
+3)  For faster syncing, consider this optional command for downloading the latest db folder hosted by one of our Alliance members.
     
-4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services.
+    ```
+    wget -r -np -nH -R "index.html*" -e robots=off https://db.adamantium.online/db/ -P ~/cnode
+    ```
+    
+4)  Follow the guide written in **README.txt** contained in the $HOME directory after installing cnode, scripts and services.
+    
+    ```
+    more ~/README.txt
+    ```
 
 ### If you plan on using prometheus and node exporter, do the following:
 1)  Download prometheus and node-exporter into the home directory
@@ -104,8 +115,15 @@ addgroup cardano video
     ```
     wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-arm64.tar.gz
     ```
+2)  Extract the tarballs
+    ```
+    tar -xzvf prometheus-2.27.1.linux-arm64.tar.gz
+    ``` 
+    ```
+    tar -xzvf node_exporter-1.1.2.linux-arm64.tar.gz
+    ```
 
-2)  Rename the folders with the following commands
+3)  Rename the folders with the following commands
 
     ```
     mv prometheus-2.27.1.linux-arm64 prometheus
@@ -114,5 +132,25 @@ addgroup cardano video
     mv node_exporter-1.1.2.linux-arm64 node_exporter
     ```
 
-3)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
+4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
+    
+    ```
+    more ~/README.txt
+    ```
 
+### General Troubleshooting
+
+1)  If you happen to use a \<username\> other than cardano, do use the following commands and replace \<username\> with your chosen username.
+
+    ```
+    sed -i 's@/home/cardano@/home/<username>@g' ~/cnode_env
+    ```
+    ```
+    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/cardano-node
+    ```
+    ```
+    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/prometheus
+    ```
+    ```
+    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/node-export
+    ```
