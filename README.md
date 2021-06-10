@@ -83,7 +83,7 @@ addgroup cardano video
     cp -r alpine-rpi-os/alpine_cnode_scripts_and_services/home/cardano/* ~/
     ```
     ```
-    sudo cp alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
+    sudo cp alpine-rpi-os/alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
     ```
     ```
     chmod +x ~/start_stop_cnode_service.sh ~/cnode/autorestart_cnode.sh
