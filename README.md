@@ -21,9 +21,9 @@
 
 7) Reboot.
 
-7) Add a new user called cardano via the command `adduser cardano` and its password as instructed. (For username other than **cardano**, refer to **General Troubleshooting**)
+8) Add a new user called cardano via the command `adduser cardano` and its password as instructed. (For username other than **cardano**, refer to **General Troubleshooting**)
 
-8) Run the following commands to grant the new user root privileges
+9) Run the following commands to grant the new user root privileges
 ```
 apk add sudo
 echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
@@ -40,9 +40,9 @@ addgroup cardano tape
 addgroup cardano video
 ```
 
-9) Either exit root via the command `exit` or reboot and login to cardano
+10) Either exit root via the command `exit` or reboot and login to cardano
 
-10) Install bash to ensure bash script compatibility
+11) Install bash to ensure bash script compatibility
 
     ```
     sudo apk add bash
