@@ -80,16 +80,14 @@ addgroup cardano video
             
 2)  Run the following commands to then install the cnode folder, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
 
-    ```
-    cd alpine-rpi-os
-        
-    sudo cp -r alpine_cnode_scripts_and_services/home/cardano/* ~/
+    ```        
+    cp -r alpine-rpi-os/alpine_cnode_scripts_and_services/home/cardano/* ~/
     ```
     ```
     sudo cp alpine_cnode_scripts_and_services/etc/init.d/* /etc/init.d/
     ```
     ```
-    chmod +x start_stop_cnode_service.sh cnode/autorestart_cnode.sh
+    chmod +x ~/start_stop_cnode_service.sh ~/cnode/autorestart_cnode.sh
     ```
     ```
     sudo chmod +x /etc/init.d/cardano-node /etc/init.d/prometheus /etc/init.d/node-exporter
