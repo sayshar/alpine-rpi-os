@@ -116,10 +116,10 @@ addgroup cardano video
     ```
 2)  Extract the tarballs.
     ```
-    tar -xzvf prometheus-2.27.1.linux-arm64.tar.gz
+    tar -xzvf prometheus.tar.gz
     ``` 
     ```
-    tar -xzvf node_exporter-1.1.2.linux-arm64.tar.gz
+    tar -xzvf node_exporter.tar.gz
     ```
 
 3)  Rename the folders with the following commands.
