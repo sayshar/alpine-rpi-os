@@ -9,7 +9,7 @@
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
 1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/aarch64/alpine-rpi-3.13.5-aarch64.tar.gz
 
-2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card
+2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card.
 
 3) Plug in a keyboard and monitor.
 
@@ -17,13 +17,13 @@
 
 5) Run the command `setup-alpine` and follow the instructions.
 
-6) Run the command `setup-disk` and create the partition. You may have to retry and erase the entire disk.
+6) At the last step of `setup-alpine`, you will be prompted to choose the system disk. In case you have missed it, run the command `setup-disk` and create the partition for `sys`. You may have to retry and erase the entire disk.
 
 7) Reboot.
 
 8) Add a new user called cardano via the command `adduser cardano` and its password as instructed. (For username other than **cardano**, refer to **General Troubleshooting**)
 
-9) Run the following commands to grant the new user root privileges
+9) Run the following commands to grant the new user full root privileges.
 ```
 apk add sudo
 echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
@@ -40,29 +40,29 @@ addgroup cardano tape
 addgroup cardano video
 ```
 
-10) Either exit root via the command `exit` or reboot and login to cardano
+10) Either exit root via the command `exit` or reboot and login to cardano. You may continue the next steps via SSH for easy copy and paste 😁.
 
-11) Install bash to ensure bash script compatibility
+11) Install bash to ensure bash script compatibility.
 
     ```
     sudo apk add bash
     ```
     
-11) Also install git and wget, we will need it later.
+11) Also install git, nano and wget, we will need it later.
 
     ```
-    sudo apk add git wget
+    sudo apk add git nano wget
     ```
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
 #### You can obtain the static binaries for version 1.27.0 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
-1)  Download the binaries
+1)  Download the binaries.
 
     ```
     wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip https://ci.zw3rk.com/build/1758/download/1/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
     ```
-2)  Unzip and install the binaries via the commands
+2)  Unzip and install the binaries via the commands.
 
     ```
     unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
@@ -106,7 +106,7 @@ addgroup cardano video
     ```
 
 ### If you plan on using prometheus and node exporter, do the following:
-1)  Download prometheus and node-exporter into the home directory
+1)  Download prometheus and node-exporter into the home directory.
     
     ```
     wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-arm64.tar.gz
@@ -114,7 +114,7 @@ addgroup cardano video
     ```
     wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-arm64.tar.gz
     ```
-2)  Extract the tarballs
+2)  Extract the tarballs.
     ```
     tar -xzvf prometheus-2.27.1.linux-arm64.tar.gz
     ``` 
@@ -122,7 +122,7 @@ addgroup cardano video
     tar -xzvf node_exporter-1.1.2.linux-arm64.tar.gz
     ```
 
-3)  Rename the folders with the following commands
+3)  Rename the folders with the following commands.
 
     ```
     mv prometheus-2.27.1.linux-arm64 prometheus
@@ -153,3 +153,7 @@ addgroup cardano video
     ```
     sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/node-export
     ```
+2)  If you have trouble with port forwarding via SSH, run the following command.
+    
+    ```
+    sudo sed -i 's/#   Tunnel no/   Tunnel yes/g' /etc/ssh/ssh_config
