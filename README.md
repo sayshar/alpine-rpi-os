@@ -153,7 +153,9 @@ addgroup cardano video
     ```
     sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/node-export
     ```
-2)  If you have trouble with port forwarding via SSH, run the following command.
+2)  If you have trouble with port forwarding via SSH, run the following command
     
     ```
-    sudo sed -i 's/#   Tunnel no/   Tunnel yes/g' /etc/ssh/ssh_config
+    sudo nano /etc/ssh/sshd_config
+    ```
+    Then edit the line `AllowTcpForwarding no` to `AllowTcpForwarding yes`. Make sure this line is not commented with `#`.
