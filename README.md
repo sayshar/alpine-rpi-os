@@ -62,6 +62,7 @@ addgroup cardano video
     ```
     wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip https://ci.zw3rk.com/build/1758/download/1/aarch64-unknown-linux-musl-cardano-node-1.27.0.zip
     ```
+    
 2)  Unzip and install the binaries via the commands.
 
     ```
