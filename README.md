@@ -75,7 +75,7 @@ addgroup cardano video
     ```
     sudo rc-update add local default
     ```
-    Then reboot the system.
+Then reboot the system.
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
