@@ -144,7 +144,19 @@ start() {
 }
 
 start_post() {
-	
+
+rcstatus=blank
+echo $rcstatus
+        while [ -f /var/run/cardano-node.pid ]
+        do
+                sleep 10
+                rcstatus=`rc-service $RC_SVCNAME status | awk '{print $NF}'`
+                if [ -z $rcstatus ]; then
+                        rc-service -c $RC_SVCNAME restart
+                        break
+                fi
+        done &
+
 	if [ "$RUNTIME" = 0 ] ; then
 		return 0
 	else
@@ -153,7 +165,6 @@ start_post() {
              	--make-pidfile --pidfile /var/run/cardano-autorestart.pid
 		eend $?
 	fi
-
 }
 
 stop() {

@@ -2,8 +2,11 @@
 
 ## Why use AlpineOS on the Raspberry Pi? Here are some reasons:
 1) Very low memory consumption (~50MB utilised during idle vs ~350MB for Ubuntu 20.04).
+
 2) Lower CPU overhead (27 tasks/ 31 threads active for Alpine vs 57 tasks / 111 threads for Ubuntu when cardano-node is running).
+
 3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
+
 4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
 
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
@@ -48,11 +51,32 @@ addgroup cardano video
     sudo apk add bash
     ```
     
-11) Also install git, nano and wget, we will need it later.
+12) Also install git, nano and wget, we will need it later.
 
     ```
     sudo apk add git nano wget
     ```
+13) By default, AlpineOS uses the powersave governor which sets CPU frequency at the lowest. To use the ondemand governor which scales CPU frequency according to system load, `cpufreq.start` is included in this repo which should be added to /etc/local.d/. You may run the following commands to do this for you.
+
+    ```
+    cd ~
+    ```
+    ```
+    git clone https://github.com/armada-alliance/alpine-rpi-os
+    ```
+    ```
+    cd alpine-rpi-os
+    ```
+    ```
+    sudo cp alpine-rpi-os/alpine_cnode_scripts_and_services/etc/local.d/cpufreq.start /etc/local.d/
+    ```
+    ```
+    sudo chmod +x /etc/local.d/cpufreq.start
+    ```
+    ```
+    sudo rc-update add local default
+    ```
+Then reboot the system.
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
@@ -74,13 +98,20 @@ addgroup cardano video
 
 ## If you have decided to use AlpineOS for your Cardano stake pool operations, you may find this collection of script and services useful.
 ### To install the scripts and services correctly:
-1)  Clone this repo to obtain the neccessary folder and scripts to quickly start your cardano node. Use the command:
+1)  Clone this repo to obtain the neccessary folder and scripts to quickly start your cardano node. You may skip this step if you have already clonned this repo from step 13 when setting up AlpineOS.
     
+    ```
+    cd ~
+    ```
     ```
     git clone https://github.com/armada-alliance/alpine-rpi-os
     ```
             
-2)  Run the following commands to then install the cnode folder, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node:
+2)  Run the following commands to then install the cnode folder, scripts and services into the correct folders. The **cnode** folder contains everything a cardano-node needs to start as a functional relay node.
+
+    ```
+    cd ~
+    ```
 
     ```        
     cp -r alpine-rpi-os/alpine_cnode_scripts_and_services/home/cardano/* ~/
