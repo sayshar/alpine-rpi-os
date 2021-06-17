@@ -19,6 +19,19 @@ source /home/cardano/cnode_env
         
 }
 
+start_post() {
+rcstatus=blank
+	while [ -f /var/run/node-exporter.pid ]
+	do
+		sleep 10
+		rcstatus=`rc-service $RC_SVCNAME status | awk '{print $NF}'`
+		if [ -z $rcstatus ]; then
+	                rc-service -c $RC_SVCNAME restart
+			break
+		fi
+	done &
+}
+
 stop() {
 	ebegin "Stopping $RC_SVCNAME"
         start-stop-daemon --stop --exec /home/cardano/node_exporter/node_exporter \
