@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Set the governor to ondemand for all processors
+for cpu in /sys/devices/system/cpu/cpufreq/policy*; do
+  echo ondemand > ${cpu}/scaling_governor              
+done
+
+# Reduce the boost threshold to 80%
+echo 80 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
