@@ -146,7 +146,6 @@ start() {
 start_post() {
 
 rcstatus=blank
-echo $rcstatus
         while [ -f /var/run/cardano-node.pid ]
         do
                 sleep 10
