@@ -2,20 +2,23 @@
 
 name=$RC_SVCNAME
 description="Prometheus service"
+command_user="cardano"
+supervisor="s6"
 
 depend() {
 	after network-online 
 }
 
+`grep -w 'USER' /etc/profile`
+source /home/$USER/cnode_env
+cd /home/$USER/prometheus/
+
 start() {
-
-source /home/cardano/cnode_env
-
         ebegin "Starting $RC_SVCNAME"
-        start-stop-daemon --background --start --exec /home/cardano/prometheus/prometheus \
+        start-stop-daemon --start --background --user $USER --exec ./prometheus \
         --make-pidfile --pidfile /var/run/prometheus.pid \
         -- --config.file="/home/cardano/prometheus/prometheus.yml" \
-        --web.listen-address="$PROMETHEUS_LISTEN_ADDRESS" 
+        --web.listen-address="$PROMETHEUS_LISTEN_ADDRESS"
         eend $?
         
 }
@@ -35,7 +38,7 @@ rcstatus=blank
 
 stop() {
 	ebegin "Stopping $RC_SVCNAME"
-        start-stop-daemon --stop --exec /home/cardano/prometheus/prometheus \
+        start-stop-daemon --stop --user $USER --exec ./prometheus \
         --pidfile /var/run/prometheus.pid \
         -s 2 
         eend $?

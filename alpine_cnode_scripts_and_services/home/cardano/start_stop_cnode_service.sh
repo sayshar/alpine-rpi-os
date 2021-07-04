@@ -1,4 +1,31 @@
 #!/bin/bash
+source /etc/profile
+
+if [ -z $USER ]; then
+	echo ""
+	echo "Detecting and storing username in /etc/profile"
+	echo ""
+	export USER=$(whoami)
+	chown $USER ~/cnode/db/*/*
+	chgrp $USER ~/cnode/db/*/*
+	chown $USER ~/cnode/*/*
+	chgrp $USER ~/cnode/*/*
+	sudo bash -c 'echo "export USER=$USER" >> /etc/profile'
+	source /etc/profile
+fi
+
+if [ "$USER" != "$(whoami)" ]; then
+        echo ""
+        echo "Detecting and storing new username in /etc/profile"
+        echo ""
+	sudo sed -i "s/export USER=$USER/export USER=$(whoami)/g" /etc/profile
+	source /etc/profile
+        chown $USER ~/cnode/db/*/*
+        chgrp $USER ~/cnode/db/*/*
+        chown $USER ~/cnode/*/*
+        chgrp $USER ~/cnode/*/*
+fi
+
 echo ""
 echo "Welcome to the cnode service management script for OpenRC"
 echo ""

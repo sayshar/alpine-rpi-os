@@ -6,8 +6,8 @@ description="Cardano node service"
 depend() {
 	after network-online 
 }
-
-source /home/cardano/cnode_env
+`grep -w 'USER' /etc/profile`
+source /home/$USER/cnode_env
 start_pre() {
 
 	if [ "$CARDANO_RUN_MODE" = 1 ] || [ "$CARDANO_RUN_MODE" = 2  ]; then
@@ -111,10 +111,10 @@ start_pre() {
 }
 
 start() {
-
+cd /usr/local/bin/
       if [ "$CARDANO_RUN_MODE" = 1 ]; then
         ebegin "Starting $RC_SVCNAME Relay Mode"
-        start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
+        start-stop-daemon --background --start --user $USER --exec ./cardano-node run \
         --make-pidfile --pidfile /var/run/cardano-node.pid \
         -- --topology $CARDANO_TOPOLOGY_PATH \
            --database-path $CARDANO_DB_PATH \
@@ -128,7 +128,7 @@ start() {
 
       if [ "$CARDANO_RUN_MODE" = 2 ]; then
         ebegin "Starting $RC_SVCNAME Block Producer Mode"
-        start-stop-daemon --background --start --exec /usr/local/bin/cardano-node run \
+        start-stop-daemon --background --start --user $USER --exec ./cardano-node run \
         --make-pidfile --pidfile /var/run/cardano-node.pid \
         -- --topology $CARDANO_TOPOLOGY_PATH \
            --database-path $CARDANO_DB_PATH \
@@ -159,16 +159,18 @@ rcstatus=blank
 	if [ "$RUNTIME" = 0 ] ; then
 		return 0
 	else
+		cd /home/$USER/cnode/
 		ebegin "$RC_SVCNAME will auto-restart in $RUNTIME seconds"
-	     	start-stop-daemon --background --start --exec /home/cardano/cnode/autorestart_cnode.sh \
+	     	start-stop-daemon --background --start --user $USER --exec ./autorestart_cnode.sh \
              	--make-pidfile --pidfile /var/run/cardano-autorestart.pid
 		eend $?
 	fi
 }
 
 stop() {
+	cd /usr/local/bin/
 	ebegin "Stopping $RC_SVCNAME"
-        start-stop-daemon --stop --exec /usr/local/bin/cardano-node run \
+        start-stop-daemon --stop --user $USER --exec ./cardano-node run \
         --pidfile /var/run/cardano-node.pid \
         -s 2 
         eend $?
@@ -179,8 +181,9 @@ stop_post() {
         if [ ! -f /var/run/cardano-autorestart.pid  ]; then
                 return 0
         else
+		cd /home/$USER/cnode/
 		ebegin "Stopping auto-restart script"
-             	start-stop-daemon --stop --exec /home/cardano/cnode/autorestart_cnode.sh \
+             	start-stop-daemon --stop --user $USER --exec ./autorestart_cnode.sh \
              	--pidfile /var/run/cardano-autorestart.pid
 		eend $?
 	fi
