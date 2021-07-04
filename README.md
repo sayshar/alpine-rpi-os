@@ -24,7 +24,7 @@
 
 7) Reboot.
 
-8) Add a new user called cardano via the command `adduser cardano` and its password as instructed. (For username other than **cardano**, refer to **General Troubleshooting**)
+8) Add a new user called cardano via the command `adduser cardano` and its password as instructed.
 
 9) Run the following commands to grant the new user full root privileges.
 ```
@@ -56,7 +56,7 @@ addgroup cardano video
     ```
     sudo apk add git nano wget
     ```
-13) By default, AlpineOS uses the powersave governor which sets CPU frequency at the lowest. To use the ondemand governor which scales CPU frequency according to system load, `cpufreq.start` is included in this repo which should be added to /etc/local.d/. You may run the following commands to do this for you.
+13) [Optional] By default, AlpineOS uses the powersave governor which sets CPU frequency at the lowest. To use the ondemand governor which scales CPU frequency according to system load, `cpufreq.start` is included in this repo which should be added to /etc/local.d/. You may run the following commands to do this for you.
 
     ```
     cd ~
@@ -76,7 +76,19 @@ addgroup cardano video
     ```
     sudo rc-update add local default
     ```
-Then reboot the system.
+14) [Optional] To alleviate RAM limitation on RPi, ZRAM is recommended to enable RAM compression. Use the following steps to install zram-init and install the scripts. The scripts provided will enable a 50% boost in useable RAM capacity. This step assumes you have followed step 13.
+
+    ```
+    sudo apk add zram-init
+    ```
+    ```
+    sudo cp alpine-rpi-os/alpine_cnode_scripts_and_services/etc/local.d/zram.* /etc/local.d/
+    ```
+    ```
+    sudo chmod +x /etc/local.d/zram.*
+    ```
+
+15) Reboot the system.
 
 ## Installing the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so you should avoid non-static builds)
 
@@ -171,21 +183,7 @@ Then reboot the system.
 
 ### General Troubleshooting
 
-1)  If you happen to use a \<username\> other than cardano, do use the following commands and replace \<username\> with your chosen username.
-
-    ```
-    sed -i 's@/home/cardano@/home/<username>@g' ~/cnode_env
-    ```
-    ```
-    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/cardano-node
-    ```
-    ```
-    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/prometheus
-    ```
-    ```
-    sudo sed -i 's@/home/cardano@/home/<username>@g' /etc/init.d/node-export
-    ```
-2)  If you have trouble with port forwarding via SSH, run the following command
+1)  If you have trouble with port forwarding via SSH, run the following command
     
     ```
     sudo nano /etc/ssh/sshd_config
