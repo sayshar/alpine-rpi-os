@@ -7,7 +7,25 @@
 
 3) Cooler Pi 😎 (Literally, CPU runs cooler because of the lower CPU overhead).
 
-4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜
+4) And finally, why not? If you're gonna use static binaries, might as well take advantage of AlpineOS 😜.
+
+## If you have previously used this guide and intend to update the scripts. Follow these steps. Then follow the rest of the steps outlined in this guide accordingly 🙂. 
+
+1) Update the git local repo.
+```
+cd ~/alpine-rpi-os
+```
+```
+git fetch --recurse-submodules --tags --all
+```
+2) Identify the latest tag.
+```
+git tag
+```
+3) Replace \<tag\> in this step with the latest tag such as `v1.1.0`.
+```
+git checkout tags/<tag>
+```
 
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
 1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/aarch64/alpine-rpi-3.13.5-aarch64.tar.gz
