@@ -153,17 +153,17 @@ addgroup cardano video
 
 ## Installing/Upgrading the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so avoid non-static builds)
 
-#### You can obtain the static binaries for version 1.30.1 via the link [https://ci.zw3rk.com/build/1758] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+#### You can obtain the static binaries for version 1.31.0 via the link [https://ci.zw3rk.com/build/410011] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries.
 
     ```
-    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.30.1.zip https://ci.zw3rk.com/build/409517/download/1/aarch64-unknown-linux-musl-cardano-node-1.30.1.zip
+    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.31.0.zip https://ci.zw3rk.com/build/410011/download/1/aarch64-unknown-linux-musl-cardano-node-1.31.0.zip
     ```
     
 2)  Unzip and install the binaries via the commands.
 
     ```
-    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.30.1.zip
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.31.0.zip
     
     sudo mv ~/cardano-node/* /usr/local/bin/
     ```
@@ -221,7 +221,7 @@ addgroup cardano video
 1)  Download prometheus and node-exporter into the home directory.
     
     ```
-    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.29.2/prometheus-2.29.2.linux-arm64.tar.gz
+    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-arm64.tar.gz
     ``` 
     ```
     wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
@@ -237,7 +237,7 @@ addgroup cardano video
 3)  Rename the folders with the following commands.
 
     ```
-    mv prometheus-2.29.2.linux-arm64 prometheus
+    mv prometheus-2.31.1.linux-arm64 prometheus
     ```
     ```
     mv node_exporter-1.2.2.linux-arm64 node_exporter
