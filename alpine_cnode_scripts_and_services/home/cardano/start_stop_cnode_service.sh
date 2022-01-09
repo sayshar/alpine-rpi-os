@@ -10,7 +10,7 @@ if [ -z $USER ]; then
 	chgrp $USER ~/cnode/db/*/*
 	chown $USER ~/cnode/*/*
 	chgrp $USER ~/cnode/*/*
-	sudo bash -c 'echo "export USER=$USER" >> /etc/profile'
+	sudo ash -c "echo 'export USER=$USER' >> /etc/profile"
 	source /etc/profile
 fi
 
