@@ -27,7 +27,7 @@ git tag
 git checkout tags/<tag>
 ```
 
-### Upgrading to Alpine v3.14 from Alpine v3.13:
+### Upgrading to Alpine v3.15 from Alpine v3.14:
 1) Update your current version of AlpineOS.
 ```
 sudo apk update
@@ -37,13 +37,13 @@ sudo apk upgrade
 ```
 2) Edit the repository to reflect Alpine v3.14.
 ```
-sudo sed -i 's@v3.13@v3.14@g' /etc/apk/repositories
+sudo sed -i 's@v3.14@v3.15@g' /etc/apk/repositories
 ```
 3) Update the package list.
 ```
 sudo apk update
 ```
-4) Upgrading packages to v3.14
+4) Upgrading packages to v3.15
 ```
 sudo apk add --upgrade apk-tools
 ```
@@ -56,7 +56,7 @@ sudo sync
 ```
 sudo reboot now
 ```
-5) Now you should have AlpineOS upgraded to v3.14 🍷.
+5) Now you should have AlpineOS upgraded to v3.15 🍷.
 ```
 cat /etc/alpine-release
 ```
@@ -64,7 +64,7 @@ cat /etc/alpine-release
 6) To troubleshoot the upgrade, refer to the link: https://wiki.alpinelinux.org/wiki/Upgrading_Alpine
 
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
-1) Download the AlpineOS for RPi 4 aarch64 here: https://dl-cdn.alpinelinux.org/alpine/v3.14/releases/aarch64/alpine-rpi-3.14.2-aarch64.tar.gz
+1) Download the AlpineOS for RPi 4 aarch64 [here](https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/aarch64/alpine-rpi-3.15.0-aarch64.tar.gz).
 
 2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card.
 
@@ -153,17 +153,17 @@ addgroup cardano video
 
 ## Installing/Upgrading the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so avoid non-static builds)
 
-#### You can obtain the static binaries for version 1.31.0 via the link [https://ci.zw3rk.com/build/410011] courtesy of Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+#### You can obtain the static binaries for version [1.33.0](https://ci.zw3rk.com/build/427926/download/1/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries.
 
     ```
-    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.31.0.zip https://ci.zw3rk.com/build/410011/download/1/aarch64-unknown-linux-musl-cardano-node-1.31.0.zip
+    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip https://ci.zw3rk.com/build/427926/download/1/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip
     ```
     
 2)  Unzip and install the binaries via the commands.
 
     ```
-    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.31.0.zip
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.33.0.zip
     
     sudo mv ~/cardano-node/* /usr/local/bin/
     ```
@@ -221,10 +221,10 @@ addgroup cardano video
 1)  Download prometheus and node-exporter into the home directory.
     
     ```
-    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-arm64.tar.gz
+    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.32.1/prometheus-2.32.1.linux-arm64.tar.gz
     ``` 
     ```
-    wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-arm64.tar.gz
+    wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-arm64.tar.gz
     ```
 2)  Extract the tarballs.
     ```
@@ -233,17 +233,25 @@ addgroup cardano video
     ```
     tar -xzvf node_exporter.tar.gz
     ```
+3)  If you are upgrading from previous versions of prometheus and node-exporter, make a backup. You may delete these folders if they do not contain anything useful.
 
-3)  Rename the folders with the following commands.
-
     ```
-    mv prometheus-2.31.1.linux-arm64 prometheus
+    mv prometheus prometheus-bak
     ```
     ```
-    mv node_exporter-1.2.2.linux-arm64 node_exporter
+    mv node_exporter node_exporter-bak
     ```
 
-4)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
+4)  Rename the folders with the following commands.
+
+    ```
+    mv prometheus-2.32.1.linux-arm64 prometheus
+    ```
+    ```
+    mv node_exporter-1.3.1.linux-arm64 node_exporter
+    ```
+
+5)  Follow the guide written in README.txt contained in the $HOME directory after installing cnode, scripts and services to start the services accordingly.
     
     ```
     more ~/README.txt
@@ -257,3 +265,23 @@ addgroup cardano video
     sudo nano /etc/ssh/sshd_config
     ```
     Then edit the line `AllowTcpForwarding no` to `AllowTcpForwarding yes`. Make sure this line is not commented with `#`.
+    
+2) If you run into a situation where you get the error:
+
+   > /lib/rc/sh/openrc-run.sh: source: line 10: can't open '/home//cnode_env': No such file or directory
+
+   Do the following:
+   
+   ```
+   export USER=$(whoami)
+   sudo ash -c "echo 'export USER=$USER' >> /etc/profile"
+   ```
+   
+   Then reboot:
+   
+   ```
+   sudo reboot
+   ```
+   
+
+   
