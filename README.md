@@ -27,7 +27,7 @@ git tag
 git checkout tags/<tag>
 ```
 
-### Upgrading to Alpine v3.15 from Alpine v3.14:
+### Upgrading to Alpine v3.16 from Alpine v3.15:
 1) Update your current version of AlpineOS.
 ```
 sudo apk update
@@ -35,15 +35,15 @@ sudo apk update
 ```
 sudo apk upgrade
 ```
-2) Edit the repository to reflect Alpine v3.14.
+2) Edit the repository to reflect Alpine v3.16.
 ```
-sudo sed -i 's@v3.14@v3.15@g' /etc/apk/repositories
+sudo sed -i 's@v3.15@v3.16@g' /etc/apk/repositories
 ```
 3) Update the package list.
 ```
 sudo apk update
 ```
-4) Upgrading packages to v3.15
+4) Upgrading packages to v3.16
 ```
 sudo apk add --upgrade apk-tools
 ```
@@ -56,7 +56,7 @@ sudo sync
 ```
 sudo reboot now
 ```
-5) Now you should have AlpineOS upgraded to v3.15 🍷.
+5) Now you should have AlpineOS upgraded to v3.16 🍷.
 ```
 cat /etc/alpine-release
 ```
@@ -64,7 +64,7 @@ cat /etc/alpine-release
 6) To troubleshoot the upgrade, refer to the link: https://wiki.alpinelinux.org/wiki/Upgrading_Alpine
 
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
-1) Download the AlpineOS for RPi 4 aarch64 [here](https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/aarch64/alpine-rpi-3.15.0-aarch64.tar.gz).
+1) Download the AlpineOS for RPi 4 aarch64 [here](https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/aarch64/alpine-rpi-3.16.0-aarch64.tar.gz).
 
 2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card.
 
@@ -157,15 +157,17 @@ addgroup cardano video
 1)  Download the binaries.
 
     ```
-    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip https://ci.zw3rk.com/build/427926/download/1/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip
+    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.35.0.zip https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_0.zip?raw=true
     ```
     
 2)  Unzip and install the binaries via the commands.
 
     ```
-    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.33.0.zip
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.35.0.zip
     
     sudo mv ~/cardano-node/* /usr/local/bin/
+    
+    rm -r ~/cardano-node
     ```
     
 
@@ -221,7 +223,7 @@ addgroup cardano video
 1)  Download prometheus and node-exporter into the home directory.
     
     ```
-    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.32.1/prometheus-2.32.1.linux-arm64.tar.gz
+    wget -O ~/prometheus.tar.gz https://github.com/prometheus/prometheus/releases/download/v2.36.2/prometheus-2.36.2.linux-arm64.tar.gz
     ``` 
     ```
     wget -O ~/node_exporter.tar.gz https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-arm64.tar.gz
@@ -245,7 +247,7 @@ addgroup cardano video
 4)  Rename the folders with the following commands.
 
     ```
-    mv prometheus-2.32.1.linux-arm64 prometheus
+    mv prometheus-2.36.2.linux-arm64 prometheus
     ```
     ```
     mv node_exporter-1.3.1.linux-arm64 node_exporter
