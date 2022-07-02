@@ -22,7 +22,7 @@ git fetch --recurse-submodules --tags --all
 ```
 git tag
 ```
-3) Replace \<tag\> in this step with the latest tag such as `v1.5.0`.
+3) Replace \<tag\> in this step with the latest tag such as `v1.6.0`.
 ```
 git checkout tags/<tag>
 ```
