@@ -153,7 +153,7 @@ addgroup cardano video
 
 ## Installing/Upgrading the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so avoid non-static builds)
 
-#### You can obtain the static binaries for version [1.33.0](https://ci.zw3rk.com/build/427926/download/1/aarch64-unknown-linux-musl-cardano-node-1.33.0.zip) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+#### You can obtain the static binaries for version [1.35.0](https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_0.zip?raw=true) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries.
 
     ```
