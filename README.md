@@ -22,7 +22,7 @@ git fetch --recurse-submodules --tags --all
 ```
 git tag
 ```
-3) Replace \<tag\> in this step with the latest tag such as `v1.6.0`.
+3) Replace \<tag\> in this step with the latest tag such as `v1.6.1`.
 ```
 git checkout tags/<tag>
 ```
@@ -153,17 +153,17 @@ addgroup cardano video
 
 ## Installing/Upgrading the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so avoid non-static builds)
 
-#### You can obtain the static binaries for version [1.35.0](https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_0.zip?raw=true) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+#### You can obtain the static binaries for version [1.35.3](https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_3.zip?raw=true) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries.
 
     ```
-    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.35.0.zip https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_0.zip?raw=true
+    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.35.3.zip https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_3.zip?raw=true
     ```
     
 2)  Unzip and install the binaries via the commands.
 
     ```
-    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.35.0.zip
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.35.3.zip
     
     sudo mv ~/cardano-node/* /usr/local/bin/
     
