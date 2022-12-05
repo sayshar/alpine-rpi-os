@@ -22,7 +22,7 @@ git fetch --recurse-submodules --tags --all
 ```
 git tag
 ```
-3) Replace \<tag\> in this step with the latest tag such as `v1.6.1`.
+3) Replace \<tag\> in this step with the latest tag such as `v1.7.0`.
 ```
 git checkout tags/<tag>
 ```
@@ -35,15 +35,15 @@ sudo apk update
 ```
 sudo apk upgrade
 ```
-2) Edit the repository to reflect Alpine v3.16.
+2) Edit the repository to reflect Alpine v3.17.
 ```
-sudo sed -i 's@v3.15@v3.16@g' /etc/apk/repositories
+sudo sed -i 's@v3.16@v3.17@g' /etc/apk/repositories
 ```
 3) Update the package list.
 ```
 sudo apk update
 ```
-4) Upgrading packages to v3.16
+4) Upgrading packages to v3.17
 ```
 sudo apk add --upgrade apk-tools
 ```
@@ -56,7 +56,7 @@ sudo sync
 ```
 sudo reboot now
 ```
-5) Now you should have AlpineOS upgraded to v3.16 🍷.
+5) Now you should have AlpineOS upgraded to v3.17 🍷.
 ```
 cat /etc/alpine-release
 ```
@@ -64,7 +64,7 @@ cat /etc/alpine-release
 6) To troubleshoot the upgrade, refer to the link: https://wiki.alpinelinux.org/wiki/Upgrading_Alpine
 
 ### Initial Setup for AlpineOS on Raspberry Pi 4B 8GB:
-1) Download the AlpineOS for RPi 4 aarch64 [here](https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/aarch64/alpine-rpi-3.16.0-aarch64.tar.gz).
+1) Download the AlpineOS for RPi 4 aarch64 [here](https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/aarch64/alpine-rpi-3.17.0-aarch64.tar.gz).
 
 2) Decompress the .tar.gz file and copy it's contents into an SSD/SD card.
 
@@ -119,14 +119,14 @@ addgroup cardano video
     git clone https://github.com/armada-alliance/alpine-rpi-os
     ```
     ```
+    cd alpine-rpi-os
+    ```    
+    ```
     git tag
     ```
-    Replace \<tag\> with the latest tag in the next command.
+    Replace \<tag\> with the latest tag in the next command such as `v1.7.0`.
     ```
     git checkout tags/<tag>
-    ```
-    ```
-    cd alpine-rpi-os
     ```
     ```
     sudo cp alpine-rpi-os/alpine_cnode_scripts_and_services/etc/local.d/cpufreq.start /etc/local.d/
@@ -153,17 +153,17 @@ addgroup cardano video
 
 ## Installing/Upgrading the 'cardano-node' and 'cardano-cli' static binaries (AlpineOS uses static binaries almost exclusively so avoid non-static builds)
 
-#### You can obtain the static binaries for version [1.35.3](https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_3.zip?raw=true) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
+#### You can obtain the static binaries for version [1.35.4](https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_4.zip?raw=true) thanks to Moritz Angermann, the SPO of ZW3RK. You can follow the following commands to install the binaries into the correct folder:
 1)  Download the binaries.
 
     ```
-    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.35.3.zip https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_3.zip?raw=true
+    wget -O ~/aarch64-unknown-linux-musl-cardano-node-1.35.4.zip https://github.com/armada-alliance/cardano-node-binaries/blob/main/static-binaries/1_35_4.zip?raw=true
     ```
     
 2)  Unzip and install the binaries via the commands.
 
     ```
-    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.35.3.zip
+    unzip -d ~/ aarch64-unknown-linux-musl-cardano-node-1.35.4.zip
     
     sudo mv ~/cardano-node/* /usr/local/bin/
     
