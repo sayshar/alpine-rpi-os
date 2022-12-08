@@ -114,7 +114,7 @@ start() {
 cd /usr/local/bin/
       if [ "$CARDANO_RUN_MODE" = 1 ]; then
         ebegin "Starting $RC_SVCNAME Relay Mode"
-        start-stop-daemon --background --start --user $USER --exec ./cardano-node run \
+        start-stop-daemon --background --start --user $USER --exec ./cardano-node +RTS -N2 --disable-delayed-os-memory-return -I0.3 -Iw600 -F1.5 -M8192m -c -RTS run \
         --make-pidfile --pidfile /var/run/cardano-node.pid \
         -- --topology $CARDANO_TOPOLOGY_PATH \
            --database-path $CARDANO_DB_PATH \
@@ -128,7 +128,7 @@ cd /usr/local/bin/
 
       if [ "$CARDANO_RUN_MODE" = 2 ]; then
         ebegin "Starting $RC_SVCNAME Block Producer Mode"
-        start-stop-daemon --background --start --user $USER --exec ./cardano-node run \
+        start-stop-daemon --background --start --user $USER --exec ./cardano-node +RTS -N2 --disable-delayed-os-memory-return -I0.3 -Iw600 -F1.5 -M8192m -c -RTS run \
         --make-pidfile --pidfile /var/run/cardano-node.pid \
         -- --topology $CARDANO_TOPOLOGY_PATH \
            --database-path $CARDANO_DB_PATH \
